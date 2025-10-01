@@ -1,0 +1,17 @@
+<script>
+    let productos = ["Arroz", "Azúcar", "Leche", "Pan", "Aceite", "Huevos"];
+    let precios = [];
+    let total = 0;
+
+    for (let i = 0; i < productos.length; i++) {
+      precios[i] = parseFloat(prompt("Ingrese el precio de " + productos[i] + ":"));
+      total += precios[i];
+    }
+
+    document.write("<h3>Precios ingresados:</h3>");
+    for (let i = 0; i < productos.length; i++) {
+      document.write(productos[i] + ": $" + precios[i].toFixed(2) + "<br>");
+    }
+    document.write("<p><strong>Valor total del inventario:</strong> $"
+     + total.toFixed(2) + "</p>");
+  </script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de temperaturas semanales</title>
+</head>
+<body>
+    <h2>Registro de temperaturas semanales - Manta</h2>
+    <form id="tempForm">
+        <label>Día 1: <input type="number" step="0.1" required></label><br>
+        <label>Día 2: <input type="number" step="0.1" required></label><br>
+        <label>Día 3: <input type="number" step="0.1" required></label><br>
+        <label>Día 4: <input type="number" step="0.1" required></label><br>
+        <label>Día 5: <input type="number" step="0.1" required></label><br>
+        <label>Día 6: <input type="number" step="0.1" required></label><br>
+        <label>Día 7: <input type="number" step="0.1" required></label><br><br>
+        <button type="submit">Analizar</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('tempForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputs = document.querySelectorAll('#tempForm input');
+            const temperaturas = Array.from(inputs).map(input => parseFloat(input.value));
+            const promedio = temperaturas.reduce((a, b) => a + b, 0) / temperaturas.length;
+            let diasSuperan = [];
+            temperaturas.forEach((temp, idx) => {
+                if (temp > promedio) diasSuperan.push(`Día ${idx + 1} (${temp}°C)`);
+            });
+
+            document.getElementById('resultado').innerHTML = `
+                <p>Temperatura promedio de la semana: <strong>${promedio.toFixed(2)}°C</strong></p>
+                <p>Días que superaron el promedio:</p>
+                <ul>
+                    ${diasSuperan.length ? diasSuperan.map(dia => `<li>${dia}</li>`).join('') : '<li>Ningún día superó el promedio.</li>'}
+                </ul>
+            `;
+        });
+    </script>
+</body>
+</html>

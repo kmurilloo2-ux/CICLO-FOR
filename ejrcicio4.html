@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>Ejercicio 4 - Ventas</title>
+</head>
+<body>
+  <h2>📊 Análisis de Ventas</h2>
+  <p>Ingrese las ventas de los 15 días:</p>
+  <div id="entradas"></div>
+  <button onclick="analizar()">🔍 Analizar</button>
+  <h3>📌 Resultado:</h3>
+  <div id="resultado" style="font-size:18px; font-weight:bold; color:blue;">
+   Aquí verás el resultado
+  </div>
+  <script>
+    for (let i = 1; i <= 15; i++) {
+      document.getElementById("entradas").innerHTML += 
+        `Día ${i}: <input id="dia${i}" type="number"><br>`;
+    }
+    function analizar() {
+      let ventas = [];
+      for (let i = 1; i <= 15; i++) {
+        let valor = Number(document.getElementById("dia"+i).value);
+        if (!valor) {
+          document.getElementById("resultado").innerText = `⚠️ Falta ingresar el día ${i}`;
+          return;
+        }
+        ventas.push(valor);
+      }
+      let mayor = Math.max(...ventas);
+      let menor = Math.min(...ventas);
+      let diaMayor = ventas.indexOf(mayor) + 1;
+      let diaMenor = ventas.indexOf(menor) + 1;
+
+      document.getElementById("resultado").innerHTML =
+        `💰 Mayor Venta: ${mayor} (día ${diaMayor})<br>📉 Menor Venta: ${menor} (día ${diaMenor})`;
+    }
+  </script>
+</body>
+</html>

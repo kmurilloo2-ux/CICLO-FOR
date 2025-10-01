@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Ejercicio 5 - Banco</title>
+</head>
+<body style="text-align:center; font-family:Arial, sans-serif;">
+  <h2>🏦 Banco MI FUTURO
+   <br> Consulta tu Saldo
+  </h2>
+  <p>Ingrese el número de cuenta (1 a 10):</p>
+  <input type="number" id="cuenta" min="1" max="10">
+  <br><br>
+  <button onclick="consultar()">🔍 Consultar</button>
+
+  <h3>📌 Resultado:</h3>
+  <div id="resultado" style="font-size:18px; font-weight:bold; color:green;">
+    👉 Aquí verás el saldo
+  </div>
+
+  <script>
+    let saldos = [500, 1200, 300, 950, 780, 600, 1100, 450, 700, 2000];
+
+    function consultar() {
+      let num = parseInt(document.getElementById("cuenta").value);
+      let resultado = document.getElementById("resultado");
+
+      if (num >= 1 && num <= 10) {
+        resultado.innerHTML = `✅ El saldo de la cuenta ${num} es: $${saldos[num - 1]}`;
+        resultado.style.color = "green";
+      } else {
+        resultado.innerHTML = "❌ Cuenta no registrada";
+        resultado.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
+</html>

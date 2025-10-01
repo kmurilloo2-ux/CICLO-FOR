@@ -1,0 +1,102 @@
+<head>
+    <title>Promedio de calificaciones</title>
+</head>
+<body>
+     <table border="1">
+        <thead>
+            <tr>
+                <th colspan="4">Promedio de calificaciones</th> <style> th { background-color: #34659a; }</style>
+            </tr>
+        </thead>
+        <body>
+            <tr>
+                <td>Ingrese la Nota: </td> 
+                <td><input type="number" id="id-txt-nota"></td> 
+                <td><button id="id-btn-agregar">Agregar</button></td> 
+                <td><button id="id-btn-presentar">Presentar</button></td> 
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <span id="id-mostrar-notas">Mostrar notas.. </span> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="id-btn-calcular-promedio">Calcular Promedio</button> 
+                <td colspan="3">
+                     <span id="id-mostrar-promedio">0.00</span>
+                </td>
+            </tr>
+            <tr>
+               <td><button id="id-btn-aprobados">Aprobados</button></td> <style> ::backdrop { background-color: #44c6b9; }</style>
+               <td><button id="id-btn-reprobados">Reprobados</button></td> <style> button { background-color: #44c6b9; }</style>
+               <td>
+                    <span id="id-mostrar-aprobados">Aprobados.. </span>
+                    <span id="id-mostrar-reprobados">Reprobados.. </span>
+               </td>
+            </tr>
+        </tbody>
+     </table>
+     <style> table { background-color: #43a89e; }</style>
+    <script>
+        const vectorNotas = []
+        const LIMITE_NOTAS = 12
+        let contador = 0
+        const txtNota = document.getElementById("id-txt-nota");
+        const btnAgregar = document.getElementById("id-btn-agregar");
+        const btnPresentar = document.getElementById("id-btn-presentar");
+        const mostrarNotas = document.getElementById("id-mostrar-notas");
+        const btnAprobados = document.getElementById("id-btn-aprobados");
+        const mostrarAprobados = document.getElementById("id-mostrar-aprobados");
+        const btnReprobados = document.getElementById("id-btn-reprobados");
+        const mostrarReprobados = document.getElementById("id-mostrar-reprobados");
+        const btnCalcularPromedio = document.getElementById("id-btn-calcular-promedio");
+        const mostrarPromedio = document.getElementById("id-mostrar-promedio");
+
+        btnAgregar.addEventListener("click",()=>{
+            if (contador < LIMITE_NOTAS) {
+                const nota = parseFloat(txtNota.value);
+                vectorNotas.push(nota);
+                txtNota.value = '';
+                contador ++;
+                console.log(vectorNotas);
+            }
+            else{
+                alert("El limite de notas a ingresar son: " + LIMITE_NOTAS )
+            }
+        });
+        btnPresentar.addEventListener('click',()=>{
+            mostrarNotas.innerHTML = vectorNotas.join('; ')
+        });
+        btnCalcularPromedio.addEventListener('click', ()=>{
+            let promedio = 0;
+            let suma = 0
+            for(let i = 0; i < vectorNotas.length; i++){
+                suma = suma + vectorNotas[i];
+            }
+            promedio = suma/vectorNotas.length;
+            mostrarPromedio.innerHTML = promedio;
+            btnAprobados.addEventListener("click", ()=>{
+                let aprobados = 0;
+                for (let i = 0; i < vectorNotas.length; i++) {
+                    if (vectorNotas[i] >= 7) {
+                        aprobados++;
+                    }
+                }
+                mostrarAprobados.innerHTML = "Aprobados: " + aprobados;
+            });
+
+            btnReprobados.addEventListener("click", ()=>{
+                let reprobados = 0;
+                for (let i = 0; i < vectorNotas.length; i++) {
+                    if (vectorNotas[i] <7) {
+                        reprobados++;
+                    }
+                }
+                mostrarReprobados.innerHTML = "Reprobados: " + reprobados;
+            });
+        });
+
+    </script>
+</body>
+</html>
